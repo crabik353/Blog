@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск постов</title>
+</head>
+<body>
+    <h1>Результаты поиска</h1>
+    <form action="/search" method="GET">
+        <input type="text" name="q" placeholder="Поиск постов..." required>
+        <select name="filter">
+            <option value="all">Все</option>
+            <option value="title">Заголовок</option>
+            <option value="content">Содержимое</option>
+            <option value="theme">Тема</option>
+            <option value="author">Автор</option>
+        </select>
+        <button type="submit">Поиск</button>
+    </form>
+    <a href="/">На главную</a>
+    {% if results %}
+    <ul>
+        {% for post in results %}
+        <li>
+            <h3>{{ post.theme }}</h3>
+            <h2>{{ post.title }}</h2>
+            <p><strong>Автор:</strong> {{ post.username }}</p>
+            <p>{{ post.content }}</p>
+            {% if post.image_url %}
+            <img src="{{ post.image_url }}" alt="Изображение" style="max-width: 300px;">
+            {% endif %}
+            <p><strong>Создан:</strong> {{ post.created_at }}</p>
+            <p><strong>Теги:</strong> {{ post.tags|join(", ") }}</p>
+            <h4>Комментарии:</h4>
+            <ul>
+                {% for comment in post.comments %}
+                <li>
+                    <strong>{{ comment.username }}:</strong> {{ comment.text }}
+                    <p><small>Создан: {{ comment.created_at }}</small></p>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Постов не найдено.</p>
+    {% endif %}
+</body>
+</html>
