@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+</head>
+<body>
+<h1>Добро пожаловать в блог!</h1>
+{% if username %}
+<p>Привет, {{ username }}!</p>
+<a href="/logout">Выйти</a>
+{% else %}
+<a href="/login">Войти</a>
+<a href="/register">Зарегистрироваться</a>
+{% endif %}
+<br>
+<a href="/posts">Просмотреть все посты</a>
+<br>
+<a href="/search">Поиск постов</a>
+</body>
+</html>
