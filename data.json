@@ -1,0 +1,36 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "\u041c\u0430\u0440\u044c\u0438\u043d \u0414\u0435\u043d\u0438\u0441",
+            "password_hash": "scrypt:32768:8:1$oYl04LLbVupBi969$56fff2d3cf927a5cf203294053364841c7e2b4d40344b733380306d4aa4a5ad9f4ad398823ecd6d95e1dd6536b5ba0b7026580356c366ff50b45ac7939f92fc0"
+        }
+    ],
+    "posts": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "theme": "\u041f\u0440\u043e\u0435\u043a\u0442",
+            "title": "\u041f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+            "content": "\u0421\u043e\u0434\u0435\u0440\u0436\u0438\u043c\u043e\u0435",
+            "image_url": "/uploads/zlubgja41cplac9de2pixmvx9ehy4oho.png",
+            "tags": [
+                "111"
+            ],
+            "created_at": "17:20 12.05.2025",
+            "likes": [
+                1
+            ],
+            "dislikes": []
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "post_id": 1,
+            "user_id": 1,
+            "text": "\u041a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0439",
+            "created_at": "17:20 12.05.2025"
+        }
+    ]
+}
