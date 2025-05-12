@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать пост</title>
+</head>
+<body>
+    <h1>Редактировать пост</h1>
+    <form method="POST">
+        <label for="theme">Тема:</label>
+        <input type="text" name="theme" id="theme" value="{{ post.theme }}" required>
+        <br>
+        <label for="title">Заголовок:</label>
+        <input type="text" name="title" id="title" value="{{ post.title }}" required>
+        <br>
+        <label for="content">Содержимое:</label>
+        <textarea name="content" id="content" required>{{ post.content }}</textarea>
+        <br>
+        <label for="tags">Теги (через запятую):</label>
+        <input type="text" name="tags" id="tags" value="{{ post.tags|join(', ') }}">
+        <br>
+        <button type="submit">Сохранить</button>
+    </form>
+    <a href="/posts">Назад к списку постов</a>
+</body>
+</html>
