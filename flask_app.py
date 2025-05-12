@@ -171,7 +171,7 @@ def create_post():
         theme = request.form.get('theme')
         title = request.form.get('title')
         content = request.form.get('content')
-        image = request.files.get('image')  # Получаем файл изображения
+        image = request.files.get('image')  
         tags_input = request.form.get('tags')
         tags = [tag.strip() for tag in tags_input.split(',') if tag.strip()] if tags_input else []
 
@@ -186,11 +186,9 @@ def create_post():
             return redirect(url_for('create_post'))
 
         image_url = None
-        if image and image.filename:  # Проверяем, что файл был загружен
-            # Сохраняем файл в папку uploads
+        if image and image.filename: 
             image_path = os.path.join(app.config['UPLOAD_FOLDER'], image.filename)
             image.save(image_path)
-            # Формируем URL для доступа к изображению
             image_url = f"/uploads/{image.filename}"
 
         new_post = {
@@ -199,7 +197,7 @@ def create_post():
             "theme": theme,
             "title": title,
             "content": content,
-            "image_url": image_url,  # Добавляем URL изображения
+            "image_url": image_url, 
             "tags": tags,
             "created_at": datetime.now().strftime("%H:%M %d.%m.%Y"),
             "likes": [],
