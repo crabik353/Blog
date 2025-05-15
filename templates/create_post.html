@@ -5,26 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Создать пост</title>
 </head>
-<body>
-<h1>Создать новый пост</h1>
-<form method="POST" enctype="multipart/form-data">
-    <label for="theme">Тема:</label>
-    <input type="text" name="theme" id="theme" required>
-    <br>
-    <label for="title">Заголовок:</label>
-    <input type="text" name="title" id="title" required>
-    <br>
-    <label for="content">Содержимое:</label>
-    <textarea name="content" id="content" required></textarea>
-    <br>
-    <label for="tags">Теги (через запятую):</label>
-    <input type="text" name="tags" id="tags">
-    <br>
-    <label for="image">Изображение:</label>
-    <input type="file" name="image" id="image">
-    <br>
-    <button type="submit">Создать</button>
-</form>
-<a href="/posts">Назад к списку постов</a>
+<body style="text-align: center; font-family: Arial, sans-serif; background-color: #f9f9f9;">
+<div style="display: inline-block; width: 80%; max-width: 800px; margin: 0 auto; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h1>Создать новый пост</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="theme">Тема:</label>
+        <input type="text" name="theme" id="theme" required>
+        <br>
+        <label for="title">Заголовок:</label>
+        <input type="text" name="title" id="title" required>
+        <br>
+        <label for="content">Содержимое:</label>
+        <textarea name="content" id="content" required></textarea>
+        <br>
+        <label for="tags">Теги (через запятую):</label>
+        <input type="text" name="tags" id="tags">
+        <br>
+        <label for="image">Изображение:</label>
+        <input type="file" name="image" id="image">
+        <br>
+        <button type="submit">Создать</button>
+    </form>
+    <a href="/posts">Назад к списку постов</a>
 </body>
 </html>
