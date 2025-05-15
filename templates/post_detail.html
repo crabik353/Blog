@@ -5,68 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Пост: {{ post.title }}</title>
 </head>
-<body>
-<h1>{{ post.title }}</h1>
-<h3>{{ post.theme }}</h3>
-<p><strong>Автор:</strong> {{ post.username }}</p>
-<p>{{ post.content }}</p>
-{% if post.image_url %}
-<img src="{{ post.image_url }}" alt="Изображение" style="max-width: 300px;">
-{% endif %}
-<p><strong>Создан:</strong> {{ post.created_at }}</p>
-<p><strong>Теги:</strong> {{ post.tags|join(", ") }}</p>
-<form action="/posts/{{ post.id }}/like" method="POST">
-    <button type="submit">👍 {{ post.likes|length }}</button>
-</form>
-<form action="/posts/{{ post.id }}/dislike" method="POST">
-    <button type="submit">👎 {{ post.dislikes|length }}</button>
-</form>
-<form id="comment-form-{{ post.id }}" onsubmit="addComment(event, {{ post.id }})">
-    <input type="text" name="text" placeholder="Напишите комментарий..." required>
-    <button type="submit">Комментировать</button>
-</form>
-<ul>
-    {% for comment in comments %}
-    {% if comment.post_id == post.id %}
-    <li>
-        <strong>{{ users[comment.user_id] }}:</strong> {{ comment.text }}
-        <p><small>Создан: {{ comment.created_at }}</small></p>
-        {% if username and users[comment.user_id] == username %}
-        <form action="/comments/{{ comment.id }}/delete" method="POST" style="display:inline;">
-            <button type="submit">Удалить</button>
-        </form>
-        {% endif %}
-    </li>
+<body style="text-align: center; font-family: Arial, sans-serif; background-color: #f9f9f9;">
+<div style="display: inline-block; width: 80%; max-width: 800px; margin: 0 auto; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h1>{{ post.title }}</h1>
+    <h3>{{ post.theme }}</h3>
+    <p><strong>Автор:</strong> {{ post.username }}</p>
+    <p>{{ post.content }}</p>
+    {% if post.image_url %}
+    <img src="{{ post.image_url }}" alt="Изображение" style="max-width: 300px;">
     {% endif %}
-    {% endfor %}
-</ul>
-{% if username and post.username == username %}
-<a href="/posts/{{ post.id }}/edit">Редактировать</a>
-<form action="/posts/{{ post.id }}/delete" method="POST" style="display:inline;">
-    <button type="submit">Удалить</button>
-</form>
-{% endif %}
-<a href="/posts">Назад к списку постов</a>
+    <p><strong>Создан:</strong> {{ post.created_at }}</p>
+    <p><strong>Теги:</strong> {{ post.tags|join(", ") }}</p>
+    <form action="/posts/{{ post.id }}/like" method="POST">
+        <button type="submit">👍 {{ post.likes|length }}</button>
+    </form>
+    <form action="/posts/{{ post.id }}/dislike" method="POST">
+        <button type="submit">👎 {{ post.dislikes|length }}</button>
+    </form>
+    <form id="comment-form-{{ post.id }}" onsubmit="addComment(event, {{ post.id }})">
+        <input type="text" name="text" placeholder="Напишите комментарий..." required>
+        <button type="submit">Комментировать</button>
+    </form>
+    <ul>
+        {% for comment in comments %}
+        {% if comment.post_id == post.id %}
+        <li>
+            <strong>{{ users[comment.user_id] }}:</strong> {{ comment.text }}
+            <p><small>Создан: {{ comment.created_at }}</small></p>
+            {% if username and users[comment.user_id] == username %}
+            <form action="/comments/{{ comment.id }}/delete" method="POST" style="display:inline;">
+                <button type="submit">Удалить</button>
+            </form>
+            {% endif %}
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% if username and post.username == username %}
+    <a href="/posts/{{ post.id }}/edit">Редактировать</a>
+    <form action="/posts/{{ post.id }}/delete" method="POST" style="display:inline;">
+        <button type="submit">Удалить</button>
+    </form>
+    {% endif %}
+    <a href="/posts">Назад к списку постов</a>
 
-<script>
-    function addComment(event, postId) {
-        event.preventDefault();
-        const form = event.target;
-        const text = form.querySelector('input[name="text"]').value;
+    <script>
+        function addComment(event, postId) {
+            event.preventDefault();
+            const form = event.target;
+            const text = form.querySelector('input[name="text"]').value;
 
-        fetch(`/posts/${postId}/comment`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `text=${encodeURIComponent(text)}`
-        }).then(response => response.json())
-          .then(data => {
-              if (data.message) {
-                  location.reload(); // Перезагружаем страницу для обновления комментариев
-              } else {
-                  alert(data.error);
-              }
-          });
-    }
-</script>
+            fetch(`/posts/${postId}/comment`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `text=${encodeURIComponent(text)}`
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.message) {
+                      location.reload(); // Перезагружаем страницу для обновления комментариев
+                  } else {
+                      alert(data.error);
+                  }
+              });
+        }
+    </script>
 </body>
 </html>
